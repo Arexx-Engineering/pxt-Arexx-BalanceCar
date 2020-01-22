@@ -7,9 +7,9 @@
 /**
  * functions for the balanceCar:
  */
-//%weight=5 color=#80FF27 icon="\uf110"
-namespace BalanceCar{
-    //%block= "turn Left| weight=2
+//%weight=5 color=#80CF67 icon="\uf110"
+namespace BalanceCar {
+    //% block="turn Left" weight=2
     export function turnLeft() {
         pins.digitalWritePin(DigitalPin.P13, 1)
         pins.digitalWritePin(DigitalPin.P14, 0)
