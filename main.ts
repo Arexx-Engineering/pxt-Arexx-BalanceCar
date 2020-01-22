@@ -60,7 +60,7 @@ namespace BalanceCar {
         control.waitMicros(10)
         pins.digitalWritePin(DigitalPin.P8, 0)
         
-        let distance=pins.pulseIn(DigitalPin.P9, PulseValue.High, 0)
+        let distance=pins.pulseIn(DigitalPin.P9, PulseValue.High)
 
         return (distance/58)
     }
