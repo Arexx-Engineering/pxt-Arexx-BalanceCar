@@ -7,7 +7,7 @@
 /**
  * functions for the balanceCar:
  */
-//%weight=5 color=#80CF67 icon="\uf110"
+//%weight=5 color=#80AF47 icon="\uf110"
 //% groups=["MotorControl"]
 namespace BalanceCar {
     //% block="turn Left" weight=2
