@@ -48,7 +48,7 @@ namespace BalanceCar {
     }
     //% block="turn left" weight=5
     //% group="MotorControl"
-    export function turnLeft(){
+    export function turnLeft() {
         pins.digitalWritePin(DigitalPin.P13, 0)
         pins.analogWritePin(AnalogPin.P14, 1023)
         pins.analogWritePin(AnalogPin.P15, 512)
@@ -60,6 +60,14 @@ namespace BalanceCar {
         pins.digitalWritePin(DigitalPin.P13, 0)
         pins.analogWritePin(AnalogPin.P14, 512)
         pins.digitalWritePin(DigitalPin.P15, 1)
+        pins.digitalWritePin(DigitalPin.P16, 0)
+    }
+    //% block="Stop" weight=1
+    //% group="MotorControl"
+    export function stop() {
+        pins.digitalWritePin(DigitalPin.P13, 0)
+        pins.digitalWritePin(DigitalPin.P14, 0)
+        pins.digitalWritePin(DigitalPin.P15, 0)
         pins.digitalWritePin(DigitalPin.P16, 0)
     }
 
