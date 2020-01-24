@@ -40,28 +40,42 @@ namespace BalanceCar {
     }
     //% block="backwards" weight=1
     //% group="MotorControl"
-    export function backwards():void {
+    export function backwards(): void {
         pins.digitalWritePin(DigitalPin.P13, 1)
         pins.digitalWritePin(DigitalPin.P14, 0)
         pins.digitalWritePin(DigitalPin.P15, 0)
         pins.digitalWritePin(DigitalPin.P16, 1)
     }
 
-
     /**
      * Blocks for controlling the ultrasonic Sensor:
      */
-    //% block="read distance in cm:"
+    //% block="read distance in cm"
     //% group="Ultrasonic sensor" weight=1
-    export function readDistance():number{
+    export function readDistance(): number {
         pins.digitalWritePin(DigitalPin.P8, 0)
         control.waitMicros(2)
         pins.digitalWritePin(DigitalPin.P8, 1)
         control.waitMicros(10)
         pins.digitalWritePin(DigitalPin.P8, 0)
-        
-        let distance=pins.pulseIn(DigitalPin.P9, PulseValue.High)
 
-        return (distance/58)
+        let distance = pins.pulseIn(DigitalPin.P9, PulseValue.High)
+
+        return (distance / 58)
+    }
+
+    /**
+     * Blocks for controlling the colour-sensor
+     */
+
+    /**
+     * returns the RGB value of the colour under the sensor in 24-bit color mode
+     * compatible to export to neopixels
+     */
+    //% block="read RGB-value"
+    //% group="Colour Sensor"
+    export function readRGB(): number {
+        let colour
+        return colour
     }
 }
