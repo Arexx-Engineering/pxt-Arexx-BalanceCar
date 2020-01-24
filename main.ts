@@ -8,7 +8,7 @@
  * functions for the balanceCar:
  */
 //%weight=5 color=#80AF47 icon="\uf110"
-//% groups=["MotorControl", "Ultrasonic Sensor"]
+//% groups=["MotorControl", "Ultrasonic Sensor", "Colour Sensor"]
 namespace BalanceCar {
     /**
      * Blocks for controlling the motors:
