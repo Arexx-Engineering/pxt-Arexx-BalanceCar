@@ -75,7 +75,41 @@ namespace BalanceCar {
     //% block="read RGB-value"
     //% group="Colour Sensor"
     export function readRGB(): number {
-        let colour
-        return colour
+        let frequency: number = 0
+        let output: number = 0
+        pins.digitalWritePin(DigitalPin.P0, 0)
+        pins.digitalWritePin(DigitalPin.P1, 0)
+        basic.pause(1)
+        frequency = pins.pulseIn(DigitalPin.P2, PulseValue.Low)
+        //serial.writeString("Red: ")
+        //serial.writeNumber(frequency)
+        if (frequency < 40) { frequency = 40 }
+        if (frequency > 110) { frequency = 110 }
+        output |= Math.map(frequency, 40, 110, 255, 0) << 16
+        basic.pause(10)
+
+        pins.digitalWritePin(DigitalPin.P0, 1)
+        pins.digitalWritePin(DigitalPin.P1, 1)
+        basic.pause(1)
+        frequency = pins.pulseIn(DigitalPin.P2, PulseValue.Low)
+        //serial.writeString(" Green: ")
+        //serial.writeNumber(frequency)
+        if (frequency < 30) { frequency = 30 }
+        if (frequency > 110) { frequency = 110 }
+        output |= Math.map(frequency, 30, 110, 255, 0) << 8
+        basic.pause(10)
+
+        pins.digitalWritePin(DigitalPin.P0, 1)
+        pins.digitalWritePin(DigitalPin.P1, 0)
+        basic.pause(1)
+        frequency = pins.pulseIn(DigitalPin.P2, PulseValue.Low)
+        //serial.writeString(" Blue: ")
+        //serial.writeNumber(frequency)
+        if (frequency < 40) { frequency = 40 }
+        if (frequency > 110) { frequency = 110 }
+        output |= Math.map(frequency, 40, 110, 255, 0)
+        basic.pause(10)
+
+        return output
     }
 }
