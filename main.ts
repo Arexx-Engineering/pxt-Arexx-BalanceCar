@@ -14,17 +14,17 @@ namespace BalanceCar {
      * Blocks for controlling the motors:
      */
 
-    //% block="turn Left" weight=2
+    //% block="spin clockwise" weight=2
     //% group="MotorControl"
-    export function turnRight(): void {
+    export function spinRight(): void {
         pins.digitalWritePin(DigitalPin.P13, 1)
         pins.digitalWritePin(DigitalPin.P14, 0)
         pins.digitalWritePin(DigitalPin.P15, 1)
         pins.digitalWritePin(DigitalPin.P16, 0)
     }
-    //% block="turn Right" weight=3
+    //% block="spin counterclockwise" weight=3
     //% group="MotorControl"
-    export function turnLeft(): void {
+    export function spinLeft(): void {
         pins.digitalWritePin(DigitalPin.P13, 0)
         pins.digitalWritePin(DigitalPin.P14, 1)
         pins.digitalWritePin(DigitalPin.P15, 0)
