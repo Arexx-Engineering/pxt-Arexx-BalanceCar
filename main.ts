@@ -99,40 +99,70 @@ namespace BalanceCar {
     //% block="read RGB-value"
     //% group="Colour Sensor"
     export function readRGB(): number {
-        let frequency: number = 0
         let output: number = 0
+        let frequency: number = 0
         pins.digitalWritePin(DigitalPin.P0, 0)
         pins.digitalWritePin(DigitalPin.P1, 0)
-        basic.pause(1)
-        frequency = pins.pulseIn(DigitalPin.P2, PulseValue.Low)
+        basic.pause(5)
+        let frequency1 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
+        control.waitMicros(4)
+        let frequency2 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
+        control.waitMicros(4)
+        let frequency3 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
+        control.waitMicros(4)
+        let frequency4 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
+        control.waitMicros(4)
+        let frequency5 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
+        control.waitMicros(4)
+        frequency = (frequency1 + frequency2 + frequency3 + frequency4 + frequency5) / 5
         //serial.writeString("Red: ")
         //serial.writeNumber(frequency)
-        if (frequency < 40) { frequency = 40 }
-        if (frequency > 110) { frequency = 110 }
-        output |= Math.map(frequency, 40, 110, 255, 0) << 16
-        basic.pause(10)
+        if (frequency < 20) { frequency = 20 }
+        if (frequency > 80) { frequency = 80 }
+        output |= Math.map(frequency, 20, 80, 255, 0) << 16
+        basic.pause(5)
 
         pins.digitalWritePin(DigitalPin.P0, 1)
         pins.digitalWritePin(DigitalPin.P1, 1)
-        basic.pause(1)
-        frequency = pins.pulseIn(DigitalPin.P2, PulseValue.Low)
+        basic.pause(5)
+        frequency1 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
+        control.waitMicros(4)
+        frequency2 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
+        control.waitMicros(4)
+        frequency3 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
+        control.waitMicros(4)
+        frequency4 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
+        control.waitMicros(4)
+        frequency5 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
+        control.waitMicros(4)
+        frequency = (frequency1 + frequency2 + frequency3 + frequency4 + frequency5) / 5
         //serial.writeString(" Green: ")
         //serial.writeNumber(frequency)
-        if (frequency < 30) { frequency = 30 }
-        if (frequency > 110) { frequency = 110 }
-        output |= Math.map(frequency, 30, 110, 255, 0) << 8
-        basic.pause(10)
+        if (frequency < 20) { frequency = 20 }
+        if (frequency > 80) { frequency = 80 }
+        output |= Math.map(frequency, 20, 80, 255, 0) << 8
+        basic.pause(5)
 
         pins.digitalWritePin(DigitalPin.P0, 1)
         pins.digitalWritePin(DigitalPin.P1, 0)
-        basic.pause(1)
-        frequency = pins.pulseIn(DigitalPin.P2, PulseValue.Low)
+        basic.pause(5)
+        frequency1 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
+        control.waitMicros(4)
+        frequency2 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
+        control.waitMicros(4)
+        frequency3 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
+        control.waitMicros(4)
+        frequency4 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
+        control.waitMicros(4)
+        frequency5 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
+        control.waitMicros(4)
+        frequency = (frequency1 + frequency2 + frequency3 + frequency4 + frequency5) / 5
         //serial.writeString(" Blue: ")
         //serial.writeNumber(frequency)
-        if (frequency < 40) { frequency = 40 }
-        if (frequency > 110) { frequency = 110 }
-        output |= Math.map(frequency, 40, 110, 255, 0)
-        basic.pause(10)
+        if (frequency < 20) { frequency = 20 }
+        if (frequency > 80) { frequency = 80 }
+        output |= Math.map(frequency, 20, 80, 255, 0)
+        basic.pause(5)
 
         return output
     }
