@@ -219,7 +219,7 @@ namespace BalanceCar {
         frequency = (frequency1 + frequency2 + frequency3 + frequency4 + frequency5) / 5
         //serial.writeString("Red: ")
         //serial.writeNumber(frequency)
-        if (frequency < 55) { RED = true }
+        if (frequency < 50) { RED = true }
         basic.pause(2)
 
         pins.digitalWritePin(DigitalPin.P0, 1)
