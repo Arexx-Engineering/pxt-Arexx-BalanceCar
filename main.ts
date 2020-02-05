@@ -103,7 +103,7 @@ namespace BalanceCar {
         let frequency: number = 0
         pins.digitalWritePin(DigitalPin.P0, 0)
         pins.digitalWritePin(DigitalPin.P1, 0)
-        basic.pause(5)
+        basic.pause(2)
         let frequency1 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
         control.waitMicros(4)
         let frequency2 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
@@ -120,11 +120,11 @@ namespace BalanceCar {
         if (frequency < 20) { frequency = 20 }
         if (frequency > 80) { frequency = 80 }
         output |= Math.map(frequency, 20, 80, 255, 0) << 16
-        basic.pause(5)
+        basic.pause(2)
 
         pins.digitalWritePin(DigitalPin.P0, 1)
         pins.digitalWritePin(DigitalPin.P1, 1)
-        basic.pause(5)
+        basic.pause(2)
         frequency1 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
         control.waitMicros(4)
         frequency2 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
@@ -141,11 +141,11 @@ namespace BalanceCar {
         if (frequency < 20) { frequency = 20 }
         if (frequency > 80) { frequency = 80 }
         output |= Math.map(frequency, 20, 80, 255, 0) << 8
-        basic.pause(5)
+        basic.pause(2)
 
         pins.digitalWritePin(DigitalPin.P0, 1)
         pins.digitalWritePin(DigitalPin.P1, 0)
-        basic.pause(5)
+        basic.pause(2)
         frequency1 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
         control.waitMicros(4)
         frequency2 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
@@ -162,7 +162,7 @@ namespace BalanceCar {
         if (frequency < 20) { frequency = 20 }
         if (frequency > 80) { frequency = 80 }
         output |= Math.map(frequency, 20, 80, 255, 0)
-        basic.pause(5)
+        basic.pause(2)
 
         return output
     }
