@@ -238,7 +238,7 @@ namespace BalanceCar {
         frequency = (frequency1 + frequency2 + frequency3 + frequency4 + frequency5) / 5
         //serial.writeString(" Green: ")
         //serial.writeNumber(frequency)
-        if(frequency<55){GREEN=true}
+        if(frequency<65){GREEN=true}
         basic.pause(2)
 
         pins.digitalWritePin(DigitalPin.P0, 1)
@@ -257,7 +257,7 @@ namespace BalanceCar {
         frequency = (frequency1 + frequency2 + frequency3 + frequency4 + frequency5) / 5
         //serial.writeString(" Blue: ")
         //serial.writeNumber(frequency)
-        if(frequency<55){BLUE=true}
+        if(frequency<65){BLUE=true}
         basic.pause(2)
         if(RED && !BLUE && !GREEN){colour="red"}
         if(!RED && BLUE && !GREEN){colour="blue"}
