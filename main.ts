@@ -10,70 +10,74 @@
 //%weight=5 color=#80AF47 icon="\uf110"
 //% groups=["MotorControl", "Ultrasonic Sensor", "Colour Sensor"]
 namespace BalanceCar {
-    let startUp=0
-    if(!startUp){
+    let startUp = 0
+    if (!startUp) {
         led.enable(false)
-        startUp=1
+        startUp = 1
     }
     /**
      * Blocks for controlling the motors:
      */
 
-    //% block="spin clockwise" weight=2
+    //% block="spin clockwise with speed %Speed" weight=2
     //% group="MotorControl"
-    export function spinRight(): void {
-        pins.digitalWritePin(DigitalPin.P13, 1)
-        pins.digitalWritePin(DigitalPin.P14, 0)
-        pins.digitalWritePin(DigitalPin.P15, 1)
-        pins.digitalWritePin(DigitalPin.P16, 0)
+    //% Speed.min=0 Speed.max=1023 Speed.defl=1023
+    export function spinRight(Speed: number = 1023): void {
+        pins.analogWritePin(AnalogPin.P13, Speed)
+        pins.analogWritePin(AnalogPin.P14, 0)
+        pins.analogWritePin(AnalogPin.P15, Speed)
+        pins.analogWritePin(AnalogPin.P16, 0)
     }
-    //% block="spin counterclockwise" weight=3
+    //% block="spin counterclockwise with speed %Speed" weight=3
     //% group="MotorControl"
-    export function spinLeft(): void {
-        pins.digitalWritePin(DigitalPin.P13, 0)
-        pins.digitalWritePin(DigitalPin.P14, 1)
-        pins.digitalWritePin(DigitalPin.P15, 0)
-        pins.digitalWritePin(DigitalPin.P16, 1)
+    //% Speed.min=0 Speed.max=1023 Speed.defl=1023
+    export function spinLeft(Speed: number = 1023): void {
+        pins.analogWritePin(AnalogPin.P13, 0)
+        pins.analogWritePin(AnalogPin.P14, Speed)
+        pins.analogWritePin(AnalogPin.P15, 0)
+        pins.analogWritePin(AnalogPin.P16, Speed)
     }
-    //% block="forwards" weight=0
+    //% block="Drive forwards with speed %Speed" weight=0
     //% group="MotorControl"
-    export function forwards(): void {
-        pins.digitalWritePin(DigitalPin.P13, 0)
-        pins.digitalWritePin(DigitalPin.P14, 1)
-        pins.digitalWritePin(DigitalPin.P15, 1)
-        pins.digitalWritePin(DigitalPin.P16, 0)
+    //% Speed.min=0 Speed.max=1023 Speed.defl=1023
+    export function forwards(Speed: number = 1023): void {
+        pins.analogWritePin(AnalogPin.P13, 0)
+        pins.analogWritePin(AnalogPin.P14, Speed)
+        pins.analogWritePin(AnalogPin.P15, Speed)
+        pins.analogWritePin(AnalogPin.P16, 0)
     }
-    //% block="backwards" weight=1
+    //% block="Drive backwards with speed %Speed" weight=1
     //% group="MotorControl"
-    export function backwards(): void {
-        pins.digitalWritePin(DigitalPin.P13, 1)
-        pins.digitalWritePin(DigitalPin.P14, 0)
-        pins.digitalWritePin(DigitalPin.P15, 0)
-        pins.digitalWritePin(DigitalPin.P16, 1)
+    //% Speed.min=0 Speed.max=1023 Speed.defl=1023
+    export function backwards(Speed: number = 1023): void {
+        pins.analogWritePin(AnalogPin.P13, Speed)
+        pins.analogWritePin(AnalogPin.P14, 0)
+        pins.analogWritePin(AnalogPin.P15, 0)
+        pins.analogWritePin(AnalogPin.P16, Speed)
     }
     //% block="turn left" weight=5
     //% group="MotorControl"
     export function turnLeft() {
-        pins.digitalWritePin(DigitalPin.P13, 0)
+        pins.analogWritePin(AnalogPin.P13, 0)
         pins.analogWritePin(AnalogPin.P14, 1023)
-        pins.analogWritePin(AnalogPin.P15, 512)
-        pins.digitalWritePin(DigitalPin.P16, 0)
+        pins.analogWritePin(AnalogPin.P15, 255)
+        pins.analogWritePin(AnalogPin.P16, 0)
     }
     //% block="turn right" weight=6
     //% group="MotorControl"
     export function turnRight() {
-        pins.digitalWritePin(DigitalPin.P13, 0)
-        pins.analogWritePin(AnalogPin.P14, 512)
-        pins.digitalWritePin(DigitalPin.P15, 1)
-        pins.digitalWritePin(DigitalPin.P16, 0)
+        pins.analogWritePin(AnalogPin.P13, 0)
+        pins.analogWritePin(AnalogPin.P14, 255)
+        pins.analogWritePin(AnalogPin.P15, 1023)
+        pins.analogWritePin(AnalogPin.P16, 0)
     }
     //% block="Stop" weight=1
     //% group="MotorControl"
     export function stop() {
-        pins.digitalWritePin(DigitalPin.P13, 0)
-        pins.digitalWritePin(DigitalPin.P14, 0)
-        pins.digitalWritePin(DigitalPin.P15, 0)
-        pins.digitalWritePin(DigitalPin.P16, 0)
+        pins.analogWritePin(AnalogPin.P13, 0)
+        pins.analogWritePin(AnalogPin.P14, 0)
+        pins.analogWritePin(AnalogPin.P15, 0)
+        pins.analogWritePin(AnalogPin.P16, 0)
     }
 
     /**
