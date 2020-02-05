@@ -257,7 +257,7 @@ namespace BalanceCar {
         frequency = (frequency1 + frequency2 + frequency3 + frequency4 + frequency5) / 5
         //serial.writeString(" Blue: ")
         //serial.writeNumber(frequency)
-        if (frequency < 75) { BLUE = true }
+        if (frequency < 70) { BLUE = true }
         basic.pause(2)
         if (RED && !BLUE && !GREEN) { colour = "red" }
         if (!RED && BLUE && !GREEN) { colour = "blue" }
