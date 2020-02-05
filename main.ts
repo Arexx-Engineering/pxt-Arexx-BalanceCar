@@ -4,18 +4,18 @@
  * Date: January 22nd 2020
  */
 
-enum SensorColors{
+enum SensorColors {
     //%block=black
-    black="black",
+    black = "black",
     //%block=white
-    white="white",
+    white = "white",
     //%block=Red
-    red="red",
+    red = "red",
     //%block=Blue
-    blue="blue",
+    blue = "blue",
     //%block=green
-    green="green"
-    
+    green = "green"
+
 }
 
 /**
@@ -196,13 +196,13 @@ namespace BalanceCar {
      */
     //% block="Read colour"
     //% group="Colour Sensor" weigth=10
-    export function readColour():string{
-        let colour:string
-        let output:number=0
+    export function readColour(): string {
+        let colour: string
+        let output: number = 0
         let frequency: number = 0
-        let RED:boolean=false
-        let GREEN:boolean=false
-        let BLUE:boolean=false
+        let RED: boolean = false
+        let GREEN: boolean = false
+        let BLUE: boolean = false
         pins.digitalWritePin(DigitalPin.P0, 0)
         pins.digitalWritePin(DigitalPin.P1, 0)
         basic.pause(2)
@@ -219,7 +219,7 @@ namespace BalanceCar {
         frequency = (frequency1 + frequency2 + frequency3 + frequency4 + frequency5) / 5
         //serial.writeString("Red: ")
         //serial.writeNumber(frequency)
-        if(frequency<55){RED=true}
+        if (frequency < 55) { RED = true }
         basic.pause(2)
 
         pins.digitalWritePin(DigitalPin.P0, 1)
@@ -238,7 +238,7 @@ namespace BalanceCar {
         frequency = (frequency1 + frequency2 + frequency3 + frequency4 + frequency5) / 5
         //serial.writeString(" Green: ")
         //serial.writeNumber(frequency)
-        if(frequency<70){GREEN=true}
+        if (frequency < 75) { GREEN = true }
         basic.pause(2)
 
         pins.digitalWritePin(DigitalPin.P0, 1)
@@ -257,16 +257,16 @@ namespace BalanceCar {
         frequency = (frequency1 + frequency2 + frequency3 + frequency4 + frequency5) / 5
         //serial.writeString(" Blue: ")
         //serial.writeNumber(frequency)
-        if(frequency<65){BLUE=true}
+        if (frequency < 65) { BLUE = true }
         basic.pause(2)
-        if(RED && !BLUE && !GREEN){colour="red"}
-        if(!RED && BLUE && !GREEN){colour="blue"}
-        if(!RED && !BLUE && GREEN){colour="green"}
-        if(RED && BLUE && GREEN){colour="white"}
-        if(!RED && !BLUE && !GREEN){colour="black"}
-        if(RED && BLUE && !GREEN){colour="purple"}
-        if(RED && !BLUE && GREEN){colour="yellow"}
-        if(!RED && BLUE && GREEN){colour="cyan"}
+        if (RED && !BLUE && !GREEN) { colour = "red" }
+        if (!RED && BLUE && !GREEN) { colour = "blue" }
+        if (!RED && !BLUE && GREEN) { colour = "green" }
+        if (RED && BLUE && GREEN) { colour = "white" }
+        if (!RED && !BLUE && !GREEN) { colour = "black" }
+        if (RED && BLUE && !GREEN) { colour = "purple" }
+        if (RED && !BLUE && GREEN) { colour = "yellow" }
+        if (!RED && BLUE && GREEN) { colour = "cyan" }
         return colour
     }
 }
