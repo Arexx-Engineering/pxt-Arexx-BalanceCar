@@ -10,6 +10,8 @@
 //%weight=5 color=#80AF47 icon="\uf110"
 //% groups=["MotorControl", "Ultrasonic Sensor", "Colour Sensor"]
 namespace BalanceCar {
+    //To enable some of the features the LED-matrix on the Micro:Bit has to be disabled, since some of the pins interfere with the connected modules.
+    //(Pin 9 for the ultrasonic sensor and Pin 3 for the RGB-LEDs)
     let startUp = 0
     if (!startUp) {
         led.enable(false)
@@ -147,9 +149,9 @@ namespace BalanceCar {
         frequency = (frequency1 + frequency2 + frequency3 + frequency4 + frequency5) / 5
         //serial.writeString(" Green: ")
         //serial.writeNumber(frequency)
-        if (frequency < 20) { frequency = 20 }
-        if (frequency > 80) { frequency = 80 }
-        output |= Math.map(frequency, 20, 80, 255, 0) << 8
+        if (frequency < 20) { frequency = 30 }
+        if (frequency > 80) { frequency = 90 }
+        output |= Math.map(frequency, 30, 90, 255, 0) << 8
         basic.pause(2)
 
         pins.digitalWritePin(DigitalPin.P0, 1)
