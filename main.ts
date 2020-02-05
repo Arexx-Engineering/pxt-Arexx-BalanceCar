@@ -10,6 +10,11 @@
 //%weight=5 color=#80AF47 icon="\uf110"
 //% groups=["MotorControl", "Ultrasonic Sensor", "Colour Sensor"]
 namespace BalanceCar {
+    let startUp=0
+    if(!startUp){
+        led.enable(false)
+        startUp=1
+    }
     /**
      * Blocks for controlling the motors:
      */
