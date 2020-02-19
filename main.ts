@@ -28,6 +28,7 @@ namespace BalanceCar {
     //(Pin 9 for the ultrasonic sensor and Pin 3 for the RGB-LEDs)
     let startUp = 0
     if (!startUp) {
+        //The built in LED-display of the Micro:Bit has to be disabled, because of the pins controlling the display are shared with the GPIO pins on the edge connector
         led.enable(false)
         startUp = 1
     }
@@ -110,7 +111,8 @@ namespace BalanceCar {
 
         let distance = pins.pulseIn(DigitalPin.P9, PulseValue.High)
 
-        return (distance / 58)
+        return (distance / 58) //distance variable is the time it took for the sound, at a speed of 340m/s to travel the distance TWICE.
+                               //To convert this to cm, it needs to be multiplied by 0,017, or divided by 58.
     }
 
     /**
@@ -192,7 +194,7 @@ namespace BalanceCar {
         return output
     }
     /**
-     * Reads teh colour underneath the colour sensor and returns as a string
+     * Reads the colour underneath the colour sensor and returns as a string
      */
     //% block="Read colour"
     //% group="Colour Sensor" weigth=10
@@ -206,6 +208,7 @@ namespace BalanceCar {
         pins.digitalWritePin(DigitalPin.P0, 0)
         pins.digitalWritePin(DigitalPin.P1, 0)
         basic.pause(2)
+        //To reduce colour-read-errors, 5 measurements are taken and averaged.
         let frequency1 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
         control.waitMicros(4)
         let frequency2 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
@@ -217,14 +220,13 @@ namespace BalanceCar {
         let frequency5 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
         control.waitMicros(4)
         frequency = (frequency1 + frequency2 + frequency3 + frequency4 + frequency5) / 5
-        //serial.writeString("Red: ")
-        //serial.writeNumber(frequency)
         if (frequency < 50) { RED = true }
         basic.pause(2)
 
         pins.digitalWritePin(DigitalPin.P0, 1)
         pins.digitalWritePin(DigitalPin.P1, 1)
         basic.pause(2)
+        //To reduce colour-read-errors, 5 measurements are taken and averaged.
         frequency1 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
         control.waitMicros(4)
         frequency2 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
@@ -236,14 +238,13 @@ namespace BalanceCar {
         frequency5 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
         control.waitMicros(4)
         frequency = (frequency1 + frequency2 + frequency3 + frequency4 + frequency5) / 5
-        //serial.writeString(" Green: ")
-        //serial.writeNumber(frequency)
         if (frequency < 80) { GREEN = true }
         basic.pause(2)
 
         pins.digitalWritePin(DigitalPin.P0, 1)
         pins.digitalWritePin(DigitalPin.P1, 0)
         basic.pause(2)
+        //To reduce colour-read-errors, 5 measurements are taken and averaged.
         frequency1 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
         control.waitMicros(4)
         frequency2 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
@@ -255,8 +256,6 @@ namespace BalanceCar {
         frequency5 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
         control.waitMicros(4)
         frequency = (frequency1 + frequency2 + frequency3 + frequency4 + frequency5) / 5
-        //serial.writeString(" Blue: ")
-        //serial.writeNumber(frequency)
         if (frequency < 70) { BLUE = true }
         basic.pause(2)
         if (RED && !BLUE && !GREEN) { colour = "red" }
