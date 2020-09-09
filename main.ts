@@ -125,70 +125,65 @@ namespace BalanceCar {
      */
     //% block="read RGB-value"
     //% group="Colour Sensor"
-    export function readRGB(): number {
-        let output: number = 0
-        let frequency: number = 0
+    // @param samples the amount of samples to take
+    export function readRGB(samples:number=10): number {
+        let output: number = 0x000000
+        let readValue:number
+
+        //Set colour mode to Red:
         pins.digitalWritePin(DigitalPin.P0, 0)
         pins.digitalWritePin(DigitalPin.P1, 0)
-        basic.pause(2)
-        let frequency1 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
-        control.waitMicros(4)
-        let frequency2 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
-        control.waitMicros(4)
-        let frequency3 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
-        control.waitMicros(4)
-        let frequency4 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
-        control.waitMicros(4)
-        let frequency5 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
-        control.waitMicros(4)
-        frequency = (frequency1 + frequency2 + frequency3 + frequency4 + frequency5) / 5
+        for(let i=0; i<samples; i++){
+            readValue += pins.pulseIn(DigitalPin.P2, PulseValue.High)
+            control.waitMicros(2)
+        }
+        //divide the total number by the amount of samples to get an average.
+        let redAverage=(readValue/samples) && 0xFF
         //serial.writeString("Red: ")
         //serial.writeNumber(frequency)
-        if (frequency < 20) { frequency = 20 }
-        if (frequency > 80) { frequency = 80 }
-        output |= Math.map(frequency, 20, 80, 255, 0) << 16
+        if (redAverage < 20) { redAverage = 20 }
+        if (redAverage > 80) { redAverage = 80 }
+        //map the read value (in microseconds) to an 8-bit number and shift it to the leftmost position in a 24-bit number.
+        output |= Math.map(redAverage, 20, 80, 255, 0) << 16
         basic.pause(2)
 
+        //Set Colour mode to Green
         pins.digitalWritePin(DigitalPin.P0, 1)
         pins.digitalWritePin(DigitalPin.P1, 1)
         basic.pause(2)
-        frequency1 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
-        control.waitMicros(4)
-        frequency2 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
-        control.waitMicros(4)
-        frequency3 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
-        control.waitMicros(4)
-        frequency4 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
-        control.waitMicros(4)
-        frequency5 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
-        control.waitMicros(4)
-        frequency = (frequency1 + frequency2 + frequency3 + frequency4 + frequency5) / 5
+        //Reset the read value
+        readValue=0
+        for(let i=0; i<samples; i++){
+            readValue += pins.pulseIn(DigitalPin.P2, PulseValue.High)
+            control.waitMicros(2)
+        }
+        //map the read value (in microseconds) to an 8-bit number and shift it to the middle position in a 24-bit number.
+        let greenAverage=(readValue/samples) && 0xFF
         //serial.writeString(" Green: ")
         //serial.writeNumber(frequency)
-        if (frequency < 20) { frequency = 30 }
-        if (frequency > 80) { frequency = 90 }
-        output |= Math.map(frequency, 30, 90, 255, 0) << 8
+        if (greenAverage < 20) { greenAverage = 30 }
+        if (greenAverage > 80) { greenAverage = 90 }
+        output |= Math.map(greenAverage, 30, 90, 255, 0) << 8
         basic.pause(2)
 
+        //Set Colour mode to blue
         pins.digitalWritePin(DigitalPin.P0, 1)
         pins.digitalWritePin(DigitalPin.P1, 0)
         basic.pause(2)
-        frequency1 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
-        control.waitMicros(4)
-        frequency2 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
-        control.waitMicros(4)
-        frequency3 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
-        control.waitMicros(4)
-        frequency4 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
-        control.waitMicros(4)
-        frequency5 = pins.pulseIn(DigitalPin.P2, PulseValue.High)
-        control.waitMicros(4)
-        frequency = (frequency1 + frequency2 + frequency3 + frequency4 + frequency5) / 5
+
+        //Reset the read value
+        readValue=0
+        for(let i=0; i<samples; i++){
+            readValue += pins.pulseIn(DigitalPin.P2, PulseValue.High)
+            control.waitMicros(2)
+        }
+        //map the read value (in microseconds) to an 8-bit number and shift it to the middle position in a 24-bit number.
+        let blueAverage=(readValue/samples) && 0xFF
         //serial.writeString(" Blue: ")
         //serial.writeNumber(frequency)
-        if (frequency < 20) { frequency = 20 }
-        if (frequency > 80) { frequency = 80 }
-        output |= Math.map(frequency, 20, 80, 255, 0)
+        if (blueAverage < 20) { blueAverage = 20 }
+        if (blueAverage > 80) { blueAverage = 80 }
+        output |= Math.map(blueAverage, 20, 80, 255, 0)
         basic.pause(2)
 
         return output
