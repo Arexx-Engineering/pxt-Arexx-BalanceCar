@@ -127,7 +127,7 @@ namespace BalanceCar {
     //% group="Colour Sensor"
     // @param samples the amount of samples to take
     export function readRGB(samples:number=10): number {
-        let output: number = 0x000000
+        let output: number
         let readValue:number
 
         //Set colour mode to Red:
@@ -138,7 +138,7 @@ namespace BalanceCar {
             control.waitMicros(2)
         }
         //divide the total number by the amount of samples to get an average.
-        let redAverage=(readValue/samples) && 0xFF
+        let redAverage=(readValue/samples) 
         //serial.writeString("Red: ")
         //serial.writeNumber(frequency)
         if (redAverage < 20) { redAverage = 20 }
@@ -158,7 +158,7 @@ namespace BalanceCar {
             control.waitMicros(2)
         }
         //map the read value (in microseconds) to an 8-bit number and shift it to the middle position in a 24-bit number.
-        let greenAverage=(readValue/samples) && 0xFF
+        let greenAverage=(readValue/samples) 
         //serial.writeString(" Green: ")
         //serial.writeNumber(frequency)
         if (greenAverage < 20) { greenAverage = 30 }
@@ -178,7 +178,7 @@ namespace BalanceCar {
             control.waitMicros(2)
         }
         //map the read value (in microseconds) to an 8-bit number and shift it to the middle position in a 24-bit number.
-        let blueAverage=(readValue/samples) && 0xFF
+        let blueAverage=(readValue/samples) 
         //serial.writeString(" Blue: ")
         //serial.writeNumber(frequency)
         if (blueAverage < 20) { blueAverage = 20 }
