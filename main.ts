@@ -129,61 +129,58 @@ namespace BalanceCar {
     export function readRGB(samples:number=10): number {
         let output: number
         let readValue:number
+        let readAverage: number
 
         //Set colour mode to Red:
         pins.digitalWritePin(DigitalPin.P0, 0)
         pins.digitalWritePin(DigitalPin.P1, 0)
+        basic.pause(2)
         for(let i=0; i<samples; i++){
-            readValue += pins.pulseIn(DigitalPin.P2, PulseValue.High)
+            readValue += pins.pulseIn(DigitalPin.P2, PulseValue.High, 100)
             control.waitMicros(2)
         }
         //divide the total number by the amount of samples to get an average.
-        let redAverage=(readValue/samples) 
+        readAverage=(readValue/samples) 
         //serial.writeString("Red: ")
         //serial.writeNumber(frequency)
-        if (redAverage < 20) { redAverage = 20 }
-        if (redAverage > 80) { redAverage = 80 }
+        Math.constrain(readAverage, 20,80)
         //map the read value (in microseconds) to an 8-bit number and shift it to the leftmost position in a 24-bit number.
-        output |= Math.map(redAverage, 20, 80, 255, 0) << 16
+        output |= Math.map(readAverage, 20, 80, 255, 0) << 16
         basic.pause(2)
 
+        //Reset the read value
+        readValue=0
+        readAverage=0
         //Set Colour mode to Green
         pins.digitalWritePin(DigitalPin.P0, 1)
         pins.digitalWritePin(DigitalPin.P1, 1)
         basic.pause(2)
-        //Reset the read value
-        readValue=0
         for(let i=0; i<samples; i++){
-            readValue += pins.pulseIn(DigitalPin.P2, PulseValue.High)
+            readValue += pins.pulseIn(DigitalPin.P2, PulseValue.High,100)
             control.waitMicros(2)
         }
         //map the read value (in microseconds) to an 8-bit number and shift it to the middle position in a 24-bit number.
-        let greenAverage=(readValue/samples) 
+        readAverage=(readValue/samples) 
         //serial.writeString(" Green: ")
         //serial.writeNumber(frequency)
-        if (greenAverage < 20) { greenAverage = 30 }
-        if (greenAverage > 80) { greenAverage = 90 }
-        output |= Math.map(greenAverage, 30, 90, 255, 0) << 8
+        Math.constrain(readAverage, 30, 90)
+        output |= Math.map(readAverage, 30, 90, 255, 0) << 8
         basic.pause(2)
 
         //Set Colour mode to blue
         pins.digitalWritePin(DigitalPin.P0, 1)
         pins.digitalWritePin(DigitalPin.P1, 0)
         basic.pause(2)
-
-        //Reset the read value
-        readValue=0
         for(let i=0; i<samples; i++){
-            readValue += pins.pulseIn(DigitalPin.P2, PulseValue.High)
+            readValue += pins.pulseIn(DigitalPin.P2, PulseValue.High,100)
             control.waitMicros(2)
         }
-        //map the read value (in microseconds) to an 8-bit number and shift it to the middle position in a 24-bit number.
-        let blueAverage=(readValue/samples) 
+        readAverage=(readValue/samples) 
         //serial.writeString(" Blue: ")
         //serial.writeNumber(frequency)
-        if (blueAverage < 20) { blueAverage = 20 }
-        if (blueAverage > 80) { blueAverage = 80 }
-        output |= Math.map(blueAverage, 20, 80, 255, 0)
+        Math.constrain(readAverage, 20 ,80)
+                //map the read value (in microseconds) to an 8-bit number
+        output |= Math.map(readAverage, 20, 80, 255, 0)
         basic.pause(2)
 
         return output
