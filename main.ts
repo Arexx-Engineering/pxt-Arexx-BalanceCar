@@ -138,6 +138,8 @@ namespace BalanceCar {
         for(let i=0; i<samples; i++){
             readValue += pins.pulseIn(DigitalPin.P2, PulseValue.High, 100)
             control.waitMicros(2)
+            serial.writeNumber(i)
+            serial.writeValue(" RED ", readValue)
         }
         //divide the total number by the amount of samples to get an average.
         readAverage=(readValue/samples) 
@@ -158,6 +160,8 @@ namespace BalanceCar {
         for(let i=0; i<samples; i++){
             readValue += pins.pulseIn(DigitalPin.P2, PulseValue.High,100)
             control.waitMicros(2)
+            serial.writeNumber(i)
+            serial.writeValue(" Green ", readValue)
         }
         //map the read value (in microseconds) to an 8-bit number and shift it to the middle position in a 24-bit number.
         readAverage=(readValue/samples) 
@@ -174,6 +178,8 @@ namespace BalanceCar {
         for(let i=0; i<samples; i++){
             readValue += pins.pulseIn(DigitalPin.P2, PulseValue.High,100)
             control.waitMicros(2)
+            serial.writeNumber(i)
+            serial.writeValue(" BLUE ", readValue)
         }
         readAverage=(readValue/samples) 
         //serial.writeString(" Blue: ")
