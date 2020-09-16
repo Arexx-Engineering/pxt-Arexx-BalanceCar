@@ -130,13 +130,16 @@ namespace BalanceCar {
         let output: number
         let readValue:number=0
         let readAverage: number
+        let readTotal=0
 
         //Set colour mode to Red:
         pins.digitalWritePin(DigitalPin.P0, 0)
         pins.digitalWritePin(DigitalPin.P1, 0)
         basic.pause(5)
         for(let i=0; i<samples; i++){
-            readValue += pins.pulseIn(DigitalPin.P2, PulseValue.High, 100)
+            readValue = pins.pulseIn(DigitalPin.P2, PulseValue.High,100)
+            Math.constrain(readValue, 20 ,80)
+            readTotal+=readValue
             control.waitMicros(5)
             serial.writeNumber(i)
             serial.writeValue(" RED ", readValue/(i+1))
@@ -159,7 +162,9 @@ namespace BalanceCar {
         pins.digitalWritePin(DigitalPin.P1, 1)
         basic.pause(5)
         for(let i=0; i<samples; i++){
-            readValue += pins.pulseIn(DigitalPin.P2, PulseValue.High,100)
+            readValue = pins.pulseIn(DigitalPin.P2, PulseValue.High,100)
+                    Math.constrain(readValue, 20 ,80)
+                    readTotal+=readValue
             control.waitMicros(5)
             serial.writeNumber(i)
             serial.writeValue(" Green ", readValue/(i+1))
@@ -178,15 +183,17 @@ namespace BalanceCar {
         pins.digitalWritePin(DigitalPin.P1, 0)
         basic.pause(5)
         for(let i=0; i<samples; i++){
-            readValue += pins.pulseIn(DigitalPin.P2, PulseValue.High,100)
+            readValue = pins.pulseIn(DigitalPin.P2, PulseValue.High,100)
+                    Math.constrain(readValue, 20 ,80)
+                    readTotal+=readValue
             control.waitMicros(5)
             serial.writeNumber(i)
             serial.writeValue(" BLUE ", readValue/(i+1))
         }
-        readAverage=(readValue/samples) 
+        readAverage=(readTotal/samples) 
         //serial.writeString(" Blue: ")
         //serial.writeNumber(frequency)
-        Math.constrain(readAverage, 20 ,80)
+
                 //map the read value (in microseconds) to an 8-bit number
         output |= Math.map(readAverage, 20, 80, 255, 0)
         serial.writeValue("BLUE TOTAL", Math.map(readAverage, 20, 80, 255, 0))
