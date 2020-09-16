@@ -130,7 +130,7 @@ namespace BalanceCar {
         let output: number
         let readValue:number=0
         let readAverage: number
-        let readTotal=0
+        let readTotal:number=0
 
         //Set colour mode to Red:
         pins.digitalWritePin(DigitalPin.P0, 0)
@@ -142,10 +142,10 @@ namespace BalanceCar {
             readTotal+=readValue
             control.waitMicros(5)
             serial.writeNumber(i)
-            serial.writeValue(" RED ", readValue/(i+1))
+            serial.writeValue(" RED ", readValue)
         }
         //divide the total number by the amount of samples to get an average.
-        readAverage=(readValue/samples) 
+        readAverage=(readTotal/samples) 
         //serial.writeString("Red: ")
         //serial.writeNumber(frequency)
         Math.constrain(readAverage, 20,80)
@@ -157,6 +157,7 @@ namespace BalanceCar {
         //Reset the read value
         readValue=0
         readAverage=0
+        readTotal=0
         //Set Colour mode to Green
         pins.digitalWritePin(DigitalPin.P0, 1)
         pins.digitalWritePin(DigitalPin.P1, 1)
@@ -167,10 +168,10 @@ namespace BalanceCar {
                     readTotal+=readValue
             control.waitMicros(5)
             serial.writeNumber(i)
-            serial.writeValue(" Green ", readValue/(i+1))
+            serial.writeValue(" Green ", readValue)
         }
         //map the read value (in microseconds) to an 8-bit number and shift it to the middle position in a 24-bit number.
-        readAverage=(readValue/samples) 
+        readAverage=(readTotal/samples) 
         //serial.writeString(" Green: ")
         //serial.writeNumber(frequency)
         Math.constrain(readAverage, 30, 90)
@@ -179,6 +180,9 @@ namespace BalanceCar {
         basic.pause(2)
 
         //Set Colour mode to blue
+                readValue=0
+        readAverage=0
+        readTotal=0
         pins.digitalWritePin(DigitalPin.P0, 1)
         pins.digitalWritePin(DigitalPin.P1, 0)
         basic.pause(5)
@@ -188,7 +192,7 @@ namespace BalanceCar {
                     readTotal+=readValue
             control.waitMicros(5)
             serial.writeNumber(i)
-            serial.writeValue(" BLUE ", readValue/(i+1))
+            serial.writeValue(" BLUE ", readValue)
         }
         readAverage=(readTotal/samples) 
         //serial.writeString(" Blue: ")
