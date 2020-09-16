@@ -148,6 +148,7 @@ namespace BalanceCar {
         Math.constrain(readAverage, 20,80)
         //map the read value (in microseconds) to an 8-bit number and shift it to the leftmost position in a 24-bit number.
         output |= Math.map(readAverage, 20, 80, 255, 0) << 16
+        serial.writeValue("RED TOTAL: ",  Math.map(readAverage, 20, 80, 255, 0))
         basic.pause(2)
 
         //Reset the read value
@@ -169,6 +170,7 @@ namespace BalanceCar {
         //serial.writeNumber(frequency)
         Math.constrain(readAverage, 30, 90)
         output |= Math.map(readAverage, 30, 90, 255, 0) << 8
+        serial.writeValue("GREEN TOTAL: ", Math.map(readAverage, 30, 90, 255, 0))
         basic.pause(2)
 
         //Set Colour mode to blue
@@ -187,6 +189,7 @@ namespace BalanceCar {
         Math.constrain(readAverage, 20 ,80)
                 //map the read value (in microseconds) to an 8-bit number
         output |= Math.map(readAverage, 20, 80, 255, 0)
+        serial.writeValue("BLUE TOTAL", Math.map(readAverage, 20, 80, 255, 0))
         basic.pause(2)
 
         return output
