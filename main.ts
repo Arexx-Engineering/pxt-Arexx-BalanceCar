@@ -138,7 +138,7 @@ namespace BalanceCar {
         basic.pause(5)
         for(let i=0; i<samples; i++){
             readValue = pins.pulseIn(DigitalPin.P2, PulseValue.High,100)
-            Math.constrain(readValue, 20 ,80)
+            readValue = Math.constrain(readValue, 20 ,80)
             readTotal+=readValue
             control.waitMicros(5)
             serial.writeNumber(i)
@@ -164,8 +164,8 @@ namespace BalanceCar {
         basic.pause(5)
         for(let i=0; i<samples; i++){
             readValue = pins.pulseIn(DigitalPin.P2, PulseValue.High,100)
-                    Math.constrain(readValue, 20 ,80)
-                    readTotal+=readValue
+            readValue = Math.constrain(readValue, 20 ,80)
+            readTotal+=readValue
             control.waitMicros(5)
             serial.writeNumber(i)
             serial.writeValue(" Green ", readValue)
@@ -188,8 +188,8 @@ namespace BalanceCar {
         basic.pause(5)
         for(let i=0; i<samples; i++){
             readValue = pins.pulseIn(DigitalPin.P2, PulseValue.High,100)
-                    Math.constrain(readValue, 20 ,80)
-                    readTotal+=readValue
+            readValue = Math.constrain(readValue, 20 ,80)
+            readTotal+=readValue
             control.waitMicros(5)
             serial.writeNumber(i)
             serial.writeValue(" BLUE ", readValue)
@@ -197,8 +197,8 @@ namespace BalanceCar {
         readAverage=(readTotal/samples) 
         //serial.writeString(" Blue: ")
         //serial.writeNumber(frequency)
-
-                //map the read value (in microseconds) to an 8-bit number
+        Math.constrain(readAverage, 20, 80)
+        //map the read value (in microseconds) to an 8-bit number
         output |= Math.map(readAverage, 20, 80, 255, 0)
         serial.writeValue("BLUE TOTAL", Math.map(readAverage, 20, 80, 255, 0))
         basic.pause(2)
