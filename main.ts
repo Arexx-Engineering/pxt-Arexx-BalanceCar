@@ -193,7 +193,7 @@ namespace BalanceCar {
     /**
      * Reads the colour underneath the colour sensor and returns as a string
      */
-    //% block="Read colour"
+    //% block="Read colour using %samples samples"
     //% group="Colour Sensor" weigth=10
     export function readColour(samples:number=10): string {
         let RED:boolean=false
