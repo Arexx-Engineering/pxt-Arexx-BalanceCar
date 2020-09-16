@@ -139,7 +139,7 @@ namespace BalanceCar {
             readValue += pins.pulseIn(DigitalPin.P2, PulseValue.High, 100)
             control.waitMicros(5)
             serial.writeNumber(i)
-            serial.writeValue(" RED ", readValue)
+            serial.writeValue(" RED ", readValue/(i+1))
         }
         //divide the total number by the amount of samples to get an average.
         readAverage=(readValue/samples) 
@@ -161,7 +161,7 @@ namespace BalanceCar {
             readValue += pins.pulseIn(DigitalPin.P2, PulseValue.High,100)
             control.waitMicros(5)
             serial.writeNumber(i)
-            serial.writeValue(" Green ", readValue)
+            serial.writeValue(" Green ", readValue/(i+1))
         }
         //map the read value (in microseconds) to an 8-bit number and shift it to the middle position in a 24-bit number.
         readAverage=(readValue/samples) 
@@ -179,7 +179,7 @@ namespace BalanceCar {
             readValue += pins.pulseIn(DigitalPin.P2, PulseValue.High,100)
             control.waitMicros(5)
             serial.writeNumber(i)
-            serial.writeValue(" BLUE ", readValue)
+            serial.writeValue(" BLUE ", readValue/(i+1))
         }
         readAverage=(readValue/samples) 
         //serial.writeString(" Blue: ")
