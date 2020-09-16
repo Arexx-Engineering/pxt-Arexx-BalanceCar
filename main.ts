@@ -138,7 +138,6 @@ namespace BalanceCar {
         basic.pause(5)
         for(let i=0; i<samples; i++){
             readValue = pins.pulseIn(DigitalPin.P2, PulseValue.High,100)
-            readValue = Math.constrain(readValue, 20 ,80)
             readTotal+=readValue
             control.waitMicros(5)
             serial.writeNumber(i)
@@ -164,7 +163,6 @@ namespace BalanceCar {
         basic.pause(5)
         for(let i=0; i<samples; i++){
             readValue = pins.pulseIn(DigitalPin.P2, PulseValue.High,100)
-            readValue = Math.constrain(readValue, 30 ,90)
             readTotal+=readValue
             control.waitMicros(5)
             serial.writeNumber(i)
@@ -188,7 +186,6 @@ namespace BalanceCar {
         basic.pause(5)
         for(let i=0; i<samples; i++){
             readValue = pins.pulseIn(DigitalPin.P2, PulseValue.High,100)
-            readValue = Math.constrain(readValue, 20 ,80)
             readTotal+=readValue
             control.waitMicros(5)
             serial.writeNumber(i)
