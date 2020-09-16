@@ -128,16 +128,16 @@ namespace BalanceCar {
     // @param samples the amount of samples to take
     export function readRGB(samples:number=10): number {
         let output: number
-        let readValue:number
+        let readValue:number=0
         let readAverage: number
 
         //Set colour mode to Red:
         pins.digitalWritePin(DigitalPin.P0, 0)
         pins.digitalWritePin(DigitalPin.P1, 0)
-        basic.pause(2)
+        basic.pause(5)
         for(let i=0; i<samples; i++){
             readValue += pins.pulseIn(DigitalPin.P2, PulseValue.High, 100)
-            control.waitMicros(2)
+            control.waitMicros(5)
             serial.writeNumber(i)
             serial.writeValue(" RED ", readValue)
         }
@@ -156,10 +156,10 @@ namespace BalanceCar {
         //Set Colour mode to Green
         pins.digitalWritePin(DigitalPin.P0, 1)
         pins.digitalWritePin(DigitalPin.P1, 1)
-        basic.pause(2)
+        basic.pause(5)
         for(let i=0; i<samples; i++){
             readValue += pins.pulseIn(DigitalPin.P2, PulseValue.High,100)
-            control.waitMicros(2)
+            control.waitMicros(5)
             serial.writeNumber(i)
             serial.writeValue(" Green ", readValue)
         }
@@ -174,10 +174,10 @@ namespace BalanceCar {
         //Set Colour mode to blue
         pins.digitalWritePin(DigitalPin.P0, 1)
         pins.digitalWritePin(DigitalPin.P1, 0)
-        basic.pause(2)
+        basic.pause(5)
         for(let i=0; i<samples; i++){
             readValue += pins.pulseIn(DigitalPin.P2, PulseValue.High,100)
-            control.waitMicros(2)
+            control.waitMicros(5)
             serial.writeNumber(i)
             serial.writeValue(" BLUE ", readValue)
         }
